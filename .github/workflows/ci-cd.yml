@@ -44,5 +44,5 @@ jobs:
       - test
     steps:
       - name: Deploy to Netlify
-        run: netlify deploy
+        run: netlify deploy --prod
 
