@@ -42,7 +42,15 @@ jobs:
     needs:
       - build
       - test
+    # steps:
+      # - name: Deploy to Netlify
+      #   run: netlify deploy --prod
+
     steps:
-      - name: Deploy to Netlify
-        run: netlify deploy --prod
+    - uses: actions/checkout@master
+
+    - name: Deploy to Netlify
+      uses: netlify/actions/build@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
