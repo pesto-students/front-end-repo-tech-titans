@@ -58,9 +58,19 @@ jobs:
       - name: Build site
         run: npm run build
 
-      # Deploy the site with netlify-cli
-      - name: Deploy Site
+      # Deploy to Netlify using our dev secrets
+      - name: Deploy to Netlify
+        uses: netlify/actions/cli@master
         env:
-          NETLIFY_SITE_ID: $
-          NETLIFY_AUTH_TOKEN: $
-        run: netlify deploy --prod
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          args: deploy --dir=build
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+
+      # # Deploy the site with netlify-cli
+      # - name: Deploy Site
+      #   env:
+      #     NETLIFY_SITE_ID: $
+      #     NETLIFY_AUTH_TOKEN: $
+      #   run: netlify deploy --prod
