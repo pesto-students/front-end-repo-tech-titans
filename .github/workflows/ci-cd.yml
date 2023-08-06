@@ -47,35 +47,35 @@ jobs:
       #   run: netlify deploy --prod
 
     steps:
-    - uses: actions/checkout@master
+    # - uses: actions/checkout@master
 
-    - name: Deploy to Netlify
-      uses: netlify/actions/build@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Deploy to Netlify
+    #   uses: netlify/actions/build@master
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
-         # Get code from repo
-      - name: Checkout code
-        uses: actions/checkout@v3
-        
-      # Install NodeJS
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-          
-      # Run npm install and build on our code
-      - run: npm ci
-      - run: npm run build --if-present
+     # Get code from repo
+    - name: Checkout code
+      uses: actions/checkout@v3
       
-      # Deploy to Netlify using our dev secrets
-      - name: Deploy to Netlify
-        uses: netlify/actions/cli@master
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        with:
-          args: deploy --dir=build --prod
-          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+    # Install NodeJS
+    - name: Use Node.js 16.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.x
+        
+    # Run npm install and build on our code
+    - run: npm ci
+    - run: npm run build --if-present
+    
+    # Deploy to Netlify using our dev secrets
+    - name: Deploy to Netlify
+      uses: netlify/actions/cli@master
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      with:
+        args: deploy --dir=build --prod
+        secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
 
