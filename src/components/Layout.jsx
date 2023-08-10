@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, CssBaseline } from "@mui/material";
+import { Container } from "@mui/material";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
