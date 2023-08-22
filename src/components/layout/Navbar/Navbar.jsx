@@ -4,23 +4,35 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
 import Badge from "@mui/material/Badge";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
-import logoSvg from '../assets/longLogo.png';
+import logoSvg from '@/assets/longLogo.png';
+import { Link as RouterLink} from "react-router-dom";
 
 const NavbarLogo = styled('img')({
   width: '15rem',
   height: 'auto',
 });
 
-const LinkButton = styled(IconButton)`
+const LinkButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.common.black,
+  "&:hover": {
+    background: "transparent",
+    color: "black"
+  }
+}));
+{/*styled(Button)`
   &:hover {
     background: transparent;
     color: black; 
   }
-`;
+`; */}
+
+
+
 
 const NavbarButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.common.light,
@@ -55,6 +67,10 @@ export default function PrimarySearchAppBar() {
     handleMobileMenuClose();
   };
 
+  const isLoggedIn = () => {
+    return false;
+  }
+
   const menuId = "primary-search-account-menu";
 
   return (
@@ -69,31 +85,31 @@ export default function PrimarySearchAppBar() {
               edge="end"
               aria-label="shop button"
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="common.black"
               sx={{ mr: 5 }}
-            >
+              component={RouterLink} to={"products"}
+              >
               Shop
             </LinkButton>
+            
 
             {/* Link to about section */}
             <LinkButton
               size="small"
               edge="end"
               aria-label="account of current user"
-              aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="common.black"
-
-            >
+              component={RouterLink} to={"about"}
+              // color="common.black"
+              >
               About
             </LinkButton>
           </Box>
 
           <Box sx={{ flexGrow: 1 }} />
           
-          <NavbarLogo src={logoSvg} alt="The Tea Lab" sx={{ mx : "auto" }} />
+          <RouterLink to={"/"}>
+            <NavbarLogo src={logoSvg} alt="The Tea Lab" sx={{ mx : "auto", }} />
+          </RouterLink>
 
           <Box sx={{ flexGrow: 1 }} />
 
@@ -124,7 +140,10 @@ export default function PrimarySearchAppBar() {
               color="primary.light"
               sx={{ mr: 0.5 }}
             >
-              <AccountCircle sx={{ fontSize: "2rem" }} />
+              {/* <RouterLink to={isLoggedIn() ? "/" : "/login"} > */}
+                {/* <NavbarLogo src={logoSvg} alt="The Tea Lab" sx={{ mx : "auto", }} /> */}
+                <AccountCircle sx={{ fontSize: "2rem" }} />
+              {/* </RouterLink> */}
             </NavbarButton>
 
             {/* Checkout Cart */}

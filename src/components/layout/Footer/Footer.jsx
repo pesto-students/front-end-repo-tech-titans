@@ -1,7 +1,6 @@
-import React from "react";
 import { AppBar, Toolbar, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import logoSvg from '../assets/roundLogo.svg';
+import logoSvg from '@/assets/roundLogo.svg';
 
 const Footer = () => {
 
