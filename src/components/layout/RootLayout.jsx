@@ -3,7 +3,7 @@ import { Container } from "@mui/material";
 import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
 import { Outlet } from 'react-router-dom';
-const Layout = ({ children }) => {
+const RootLayout = ({ children }) => {
   return (
     <div style={{ height: "100%"}}>
       <Navbar />
