@@ -23,7 +23,7 @@ const HeroSection = () => {
 
   const HeroText = () => {
     const textStyle = {
-      padding: "16px",
+      padding: "15px",
       ...(isMobile && { textAlign: "center" }),
     };
     return (
@@ -52,15 +52,11 @@ const HeroSection = () => {
   };
 
   const LargeScreenComponent = () => (
-    <Grid container spacing={4} direction="row-reverse" alignItems="center">
-      <Grid item xs={12} md={5} container justifyContent="right">
-        <img
-          src={heroImageUrl}
-          alt="Hero"
-          style={{ maxWidth: "100%", height: "auto" }}
-        />
+    <Grid container spacing={0} direction="row-reverse" alignItems="center">
+      <Grid item xs={12} md={6} lg={5} container justifyContent="right">
+        <img src={heroImageUrl} alt="Hero" style={{ height: "auto" }} />
       </Grid>
-      <Grid item xs={12} md={6} style={{ margin: "0 auto" }}>
+      <Grid item xs={12} md={6} lg={6}>
         <HeroText />
       </Grid>
     </Grid>
