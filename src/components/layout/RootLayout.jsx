@@ -2,19 +2,16 @@ import React from "react";
 import { Container } from "@mui/material";
 import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
-import { Outlet } from 'react-router-dom';
+import { Outlet } from "react-router-dom";
 const RootLayout = ({ children }) => {
   return (
-    <div style={{ height: "100%"}}>
+    <div style={{ height: "100%" }}>
       <Navbar />
-      <Container
-        maxWidth="lg"
-        style={{ paddingTop: "64px", paddingBottom: "64px" }}
-      >
+      <Container maxWidth="false" style={{ padding: "10px 0px" }}>
         <Outlet />
       </Container>
-      <Footer /> 
-    </ div>
+      <Footer />
+    </div>
   );
 };
 
