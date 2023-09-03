@@ -1,33 +1,26 @@
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import logoSvg from '@/assets/roundLogo.svg';
+import logoSvg from "@/assets/roundLogo.svg";
 
 const Footer = () => {
-
-  const Footer = styled(AppBar)(({ theme }) => ({
+  const Footer = styled("footer")(({ theme }) => ({
     bottom: 0,
-    left: 0,
-    right: 0,
-    textAlign: "center",
-    padding: "16px",
+    padding: "0 16px",
     color: "#fff",
-    backgroundColor: theme.palette.common.black
+    backgroundColor: theme.palette.common.black,
   }));
 
-  const NavbarLogo = styled('img')({
-    width: '5rem',
-    position: "absolute",
-    right: 0
+  const Logo = styled("img")({
+    width: "5rem",
+    margin: 0,
   });
 
   return (
-    <Footer position="static">
-      <Toolbar>
-        <Typography variant="body2">
-          © The Tea Lab, 2023
-        </Typography>
-        <NavbarLogo src={logoSvg} alt="The Tea Lab" sx={{ mx : "auto" }} />
-      </Toolbar>
+    <Footer>
+      <Box py={1} px={3} style={{ display: "flex", alignItems: "center" }}>
+        <Typography variant="body2">© The Tea Lab, 2023</Typography>
+        <Logo src={logoSvg} alt="The Tea Lab" sx={{ ml: "auto" }} />
+      </Box>
     </Footer>
   );
 };

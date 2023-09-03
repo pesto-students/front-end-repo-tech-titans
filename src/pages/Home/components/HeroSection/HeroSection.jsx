@@ -28,10 +28,7 @@ const HeroSection = () => {
     };
     return (
       <Paper elevation={0} style={textStyle}>
-        <Typography
-          variant={isMobile ? "h2" : "h1"}
-          style={{ marginBottom: "10px" }}
-        >
+        <Typography variant="h3" style={{ marginBottom: "10px" }}>
           Awaken Your Senses
         </Typography>
         <Typography variant="h5" paragraph>
@@ -42,7 +39,7 @@ const HeroSection = () => {
           variant="contained"
           size="large"
           component={Link}
-          to={"products"}
+          to="products"
           style={{ backgroundColor: "black" }}
         >
           Shop Now

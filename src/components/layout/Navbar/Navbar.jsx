@@ -9,36 +9,46 @@ import Badge from "@mui/material/Badge";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
-import logoSvg from '@/assets/longLogo.png';
-import { Link as RouterLink} from "react-router-dom";
+import logoSvg from "@/assets/longLogo.png";
+import { Link as RouterLink, NavLink } from "react-router-dom";
 
-const NavbarLogo = styled('img')({
-  width: '15rem',
-  height: 'auto',
+const NavbarLogo = styled("img")({
+  width: "15rem",
+  height: "auto",
 });
 
 const LinkButton = styled(Button)(({ theme }) => ({
   color: theme.palette.common.black,
   "&:hover": {
     background: "transparent",
-    color: "black"
-  }
+    color: "black",
+  },
 }));
-{/*styled(Button)`
+
+const NavLinkButton = styled(NavLink)`
+  .inactive {
+    color: grey;
+  }
+
+  .active {
+    color: black;
+  }
+`;
+
+{
+  /*styled(Button)`
   &:hover {
     background: transparent;
     color: black; 
   }
-`; */}
-
-
-
+`; */
+}
 
 const NavbarButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.common.light,
   "&:hover": {
-    color: theme.palette.common.black
-  }
+    color: theme.palette.common.black,
+  },
 }));
 
 const ShoppingCartBadge = styled(Badge)(({ theme }) => ({
@@ -46,13 +56,12 @@ const ShoppingCartBadge = styled(Badge)(({ theme }) => ({
     backgroundColor: theme.palette.common.light,
     color: "black",
     border: "1px solid black",
-  }
+  },
 }));
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -69,16 +78,16 @@ export default function PrimarySearchAppBar() {
 
   const isLoggedIn = () => {
     return false;
-  }
+  };
 
   const menuId = "primary-search-account-menu";
 
   return (
     <Box sx={{ flexGrow: 1, borderBottom: "1px solid black" }}>
-      <AppBar position="static" elevation={0} style={{ background: 'white' }}>
+      <AppBar position="static" elevation={0} style={{ background: "white" }}>
         <Toolbar>
           {/* Header Left Section */}
-          <Box sx={{ display: { xs: "none", md: "flex" }  }}>
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {/* Link to products section */}
             <LinkButton
               size="small"
@@ -86,11 +95,11 @@ export default function PrimarySearchAppBar() {
               aria-label="shop button"
               aria-haspopup="true"
               sx={{ mr: 5 }}
-              component={RouterLink} to={"products"}
-              >
+              component={RouterLink}
+              to={"products"}
+            >
               Shop
             </LinkButton>
-            
 
             {/* Link to about section */}
             <LinkButton
@@ -98,17 +107,15 @@ export default function PrimarySearchAppBar() {
               edge="end"
               aria-label="account of current user"
               aria-haspopup="true"
-              component={RouterLink} to={"about"}
-              // color="common.black"
-              >
+            >
               About
             </LinkButton>
           </Box>
 
           <Box sx={{ flexGrow: 1 }} />
-          
+
           <RouterLink to={"/"}>
-            <NavbarLogo src={logoSvg} alt="The Tea Lab" sx={{ mx : "auto", }} />
+            <NavbarLogo src={logoSvg} alt="The Tea Lab" sx={{ mx: "auto" }} />
           </RouterLink>
 
           <Box sx={{ flexGrow: 1 }} />
@@ -126,7 +133,7 @@ export default function PrimarySearchAppBar() {
               color="primary.light"
               sx={{ mr: 0.5 }}
             >
-              <SearchIcon sx={{ fontSize: "2rem",  }} />
+              <SearchIcon sx={{ fontSize: "2rem" }} />
             </NavbarButton>
 
             {/* Profile Icon */}
@@ -141,8 +148,8 @@ export default function PrimarySearchAppBar() {
               sx={{ mr: 0.5 }}
             >
               {/* <RouterLink to={isLoggedIn() ? "/" : "/login"} > */}
-                {/* <NavbarLogo src={logoSvg} alt="The Tea Lab" sx={{ mx : "auto", }} /> */}
-                <AccountCircle sx={{ fontSize: "2rem" }} />
+              {/* <NavbarLogo src={logoSvg} alt="The Tea Lab" sx={{ mx : "auto", }} /> */}
+              <AccountCircle sx={{ fontSize: "2rem" }} />
               {/* </RouterLink> */}
             </NavbarButton>
 
@@ -154,7 +161,7 @@ export default function PrimarySearchAppBar() {
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
             >
-              <ShoppingCartBadge badgeContent={1} >
+              <ShoppingCartBadge badgeContent={1}>
                 <ShoppingBagOutlinedIcon sx={{ fontSize: "2rem" }} />
               </ShoppingCartBadge>
             </NavbarButton>
