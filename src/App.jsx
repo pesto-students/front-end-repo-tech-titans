@@ -1,16 +1,14 @@
-import { useState } from 'react'
-import './App.css'
-import Layout from './components/Layout';
+import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import routes from "@/routes/routesConfig";
+const router = createBrowserRouter(routes);
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-    <Layout>
-    </Layout>
+      <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
