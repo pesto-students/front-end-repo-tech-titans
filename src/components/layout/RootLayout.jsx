@@ -7,7 +7,7 @@ const RootLayout = ({ children }) => {
   return (
     <div style={{ height: "100%" }}>
       <Navbar />
-      <Container maxWidth="false" style={{ padding: "10px 0px" }}>
+      <Container maxWidth={false} style={{ padding: "10px 0px" }}>
         <Outlet />
       </Container>
       <Footer />
