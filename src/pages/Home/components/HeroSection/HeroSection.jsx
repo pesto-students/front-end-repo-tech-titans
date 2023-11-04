@@ -49,7 +49,13 @@ const HeroSection = () => {
   };
 
   const LargeScreenComponent = () => (
-    <Grid container spacing={0} direction="row-reverse" alignItems="center">
+    <Grid
+      component="section"
+      container
+      spacing={0}
+      direction="row-reverse"
+      alignItems="center"
+    >
       <Grid item xs={12} md={6} lg={5} container justifyContent="right">
         <img src={heroImageUrl} alt="Hero" style={{ height: "auto" }} />
       </Grid>
@@ -60,14 +66,14 @@ const HeroSection = () => {
   );
 
   const MobileScreenComponent = () => (
-    <>
+    <section>
       <img
         src={heroImageUrl}
         alt="Hero"
         style={{ maxWidth: "100%", height: "auto" }}
       />
       <HeroText />
-    </>
+    </section>
   );
   return isMobile ? <MobileScreenComponent /> : <LargeScreenComponent />;
 };

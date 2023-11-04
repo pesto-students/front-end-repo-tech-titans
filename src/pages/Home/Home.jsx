@@ -25,7 +25,7 @@ const Home = () => {
       <HeroSection />
 
       {/* Categories Section */}
-      <Container sx={{ mt: 6 }}>
+      <Container component="section" sx={{ mt: 6 }}>
         <Typography variant="h4" paragraph>
           Shop by category
         </Typography>
