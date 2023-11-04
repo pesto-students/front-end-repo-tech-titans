@@ -1,4 +1,4 @@
-import { styled } from "@mui/material/styles";
+import { Link as RouterLink } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -14,9 +14,11 @@ const cardStyles = {
 };
 
 const ProductCard = ({ data }) => {
+  const { id: productId } = data;
   return (
     <Card sx={cardStyles} elevation={0}>
-      <CardActionArea>
+      <CardActionArea component={RouterLink} to={`${productId}`}>
+        {/* <CardActionArea> */}
         <CardMedia
           component="img"
           image="https://images.unsplash.com/photo-1597088268939-ca0a66007a4d?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -24,7 +26,7 @@ const ProductCard = ({ data }) => {
         />
         <CardContent>
           <Typography align="center" gutterBottom variant="h6">
-            Product Name 👉 {data}
+            Product Name 👉 {productId}
           </Typography>
           <Typography align="center" variant="body1">
             Product Price

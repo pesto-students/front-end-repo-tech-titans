@@ -1,7 +1,7 @@
 import { styled } from "@mui/material/styles";
 import ProductCard from "../ProductCard/ProductCard";
 
-const StyledProdcutSection = styled("section")(({ theme }) => ({
+const StyledProductSection = styled("section")(({ theme }) => ({
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
   gridGap: "40px",
@@ -10,11 +10,11 @@ const StyledProdcutSection = styled("section")(({ theme }) => ({
 
 const ProductSection = ({ products }) => {
   return (
-    <StyledProdcutSection>
-      {products.map((idx, item) => (
+    <StyledProductSection>
+      {products.map((item, idx) => (
         <ProductCard data={item} key={idx} />
       ))}
-    </StyledProdcutSection>
+    </StyledProductSection>
   );
 };
 

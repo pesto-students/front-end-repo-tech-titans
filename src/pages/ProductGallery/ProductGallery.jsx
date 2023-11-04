@@ -6,7 +6,7 @@ import Filter from "./components/Filter/Filter";
 import Sort from "./components/Sort/Sort";
 import ProductSection from "./components/ProductSection/ProductSection";
 
-const Products = () => {
+const ProductGallery = () => {
   const breadcrumbItems = [
     {
       label: "Home",
@@ -22,26 +22,28 @@ const Products = () => {
     justifyContent: "space-between",
     padding: "16px 0px",
   };
+
+  const productList = [1, 2, 3, 4, 5].map((i) => ({
+    id: i,
+  }));
   return (
-    <>
-      <Container maxWidth="xl" sx={{ mt: 3, mx: "auto" }}>
-        {/* Hide on mobile view */}
-        {/* Current Path */}
-        <BreadCrumb pathItems={breadcrumbItems} />
+    <Container maxWidth="xl" sx={{ mt: 3, mx: "auto" }}>
+      {/* Hide on mobile view */}
+      {/* Current Path */}
+      <BreadCrumb pathItems={breadcrumbItems} />
 
-        {/* Filter and Sort Section */}
-        <div className="product-filters" style={filterSectionStyle}>
-          <Filter />
-          <Sort />
-        </div>
+      {/* Filter and Sort Section */}
+      <div className="product-filters" style={filterSectionStyle}>
+        <Filter />
+        <Sort />
+      </div>
 
-        <Divider variant="" style={{ borderColor: grey["400"] }} />
+      <Divider variant="" style={{ borderColor: grey["400"] }} />
 
-        {/* Product cards */}
-        <ProductSection products={[1, 2, 3, 4, 5]} />
-      </Container>
-    </>
+      {/* Product cards */}
+      <ProductSection products={productList} />
+    </Container>
   );
 };
 
-export default Products;
+export default ProductGallery;
