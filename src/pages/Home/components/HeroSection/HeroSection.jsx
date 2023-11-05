@@ -57,7 +57,12 @@ const HeroSection = () => {
       alignItems="center"
     >
       <Grid item xs={12} md={6} lg={5} container justifyContent="right">
-        <img src={heroImageUrl} alt="Hero" style={{ height: "auto" }} />
+        <img
+          src={heroImageUrl}
+          alt="Hero"
+          style={{ height: "auto" }}
+          loading="eager"
+        />
       </Grid>
       <Grid item xs={12} md={6} lg={6}>
         <HeroText />

@@ -14,10 +14,8 @@ const Filter = () => {
   return (
     <Box sx={{ minWidth: 85 }}>
       <FormControl fullWidth size="small">
-        <InputLabel id="demo-simple-select-label">Filter</InputLabel>
+        <InputLabel htmlFor="Filter">Filter</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
           value={filter}
           label="Filter"
           style={{ backgroundColor: "white" }}

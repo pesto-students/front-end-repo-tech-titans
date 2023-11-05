@@ -6,7 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 const Sort = () => {
-  const [filter, setSortValue] = useState("");
+  const [sortValue, setSortValue] = useState("");
 
   const handleChange = (event) => {
     setSortValue(event.target.value);
@@ -14,11 +14,9 @@ const Sort = () => {
   return (
     <Box sx={{ minWidth: 85 }}>
       <FormControl fullWidth size="small">
-        <InputLabel id="demo-simple-select-label">Sort</InputLabel>
+        <InputLabel htmlFor="Sort">Sort</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={filter}
+          value={sortValue}
           label="Sort"
           style={{ backgroundColor: "white" }}
           onChange={handleChange}

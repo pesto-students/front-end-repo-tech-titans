@@ -18,7 +18,6 @@ const ProductCard = ({ data }) => {
   return (
     <Card sx={cardStyles} elevation={0}>
       <CardActionArea component={RouterLink} to={`${productId}`}>
-        {/* <CardActionArea> */}
         <CardMedia
           component="img"
           image="https://images.unsplash.com/photo-1597088268939-ca0a66007a4d?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

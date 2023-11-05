@@ -38,7 +38,7 @@ const ProductGallery = () => {
         <Sort />
       </div>
 
-      <Divider variant="" style={{ borderColor: grey["400"] }} />
+      <Divider style={{ borderColor: grey["400"] }} />
 
       {/* Product cards */}
       <ProductSection products={productList} />
