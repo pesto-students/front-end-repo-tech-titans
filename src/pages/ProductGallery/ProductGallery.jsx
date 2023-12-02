@@ -1,10 +1,9 @@
-import { useState } from "react";
 import { Container, Divider, CircularProgress } from "@mui/material";
 import { grey, red } from "@mui/material/colors";
 import BreadCrumb from "@/components/common/BreadCrumb/BreadCrumb";
 import useProductList from "@/hooks/products/useProductList";
 import useCategoryList from "@/hooks/categories/useCategoryList";
-import ErrorContainer from "@/components/common/Error/Error";
+import Message from "@/components/common/Message/Message";
 import FilterSortSection from "./components/FilterSortSection/FilterSortSection";
 import ProductSection from "./components/ProductSection/ProductSection";
 
@@ -27,15 +26,6 @@ const ProductGallery = () => {
     },
   ];
 
-  const filterProps = {
-    categories,
-  };
-
-  const sortProps = {
-    // sort,
-    // setSort,
-  };
-  console.log({ products, isLoading: isProductsLoading, error: productsError });
   return (
     <Container maxWidth="xl" sx={{ mt: 3, mx: "auto", textAlign: "center" }}>
       {/* Hide on mobile view */}
@@ -44,8 +34,7 @@ const ProductGallery = () => {
 
       {/* Filter and Sort Section */}
       <FilterSortSection
-        filterProps={filterProps}
-        sortProps={sortProps}
+        categories={categories}
         fetchProducts={fetchProducts}
       />
 
@@ -57,10 +46,17 @@ const ProductGallery = () => {
       )}
 
       {/* Display error component if fetching data fails*/}
-      {productsError && (
-        <ErrorContainer>
-          <p style={{ color: red["700"] }}>{productsError}</p>
-        </ErrorContainer>
+      {!isProductsLoading && productsError && (
+        <Message error>
+          <p>{productsError}</p>
+        </Message>
+      )}
+
+      {/* Display message if no data matches filters*/}
+      {!isProductsLoading && !productsError && products?.length === 0 && (
+        <Message>
+          <p>No Data Available for Selected Filters</p>
+        </Message>
       )}
 
       {/* Product cards */}

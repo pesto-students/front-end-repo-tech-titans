@@ -9,7 +9,7 @@ export const getAllProducts = async (
 ) => {
   const queryParams = {
     ...filterOptions,
-    ...sortOptions,
+    ...(sortOptions && { sortBy: sortOptions }),
   };
   const { data } = await axios.get(PRODUCT_ENDPOINT, {
     params: queryParams,

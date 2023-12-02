@@ -1,11 +1,19 @@
 import { useState } from "react";
-import { Drawer, Box, Button, IconButton, styled } from "@mui/material";
+import {
+  Drawer,
+  Box,
+  Button,
+  IconButton,
+  FormControl,
+  InputLabel,
+  Select,
+  styled,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { grey } from "@mui/material/colors";
-import Filter from "../Filter/Filter";
-import Sort from "../Sort/Sort";
-import FilterDrawerContent from "../FilterDrawerContent/FilterDrawerContent";
 import { INITIAL_FILTER_CONFIG } from "@/constants/initialConfig";
+import FilterDrawerContent from "../FilterDrawerContent/FilterDrawerContent";
+import SortDrawerContent from "../SortDrawerContent/SortDrawerContent";
 
 const ButtonGroup = styled("div")(({ theme }) => ({
   marginTop: "auto",
@@ -17,15 +25,36 @@ const ButtonGroup = styled("div")(({ theme }) => ({
   },
 }));
 
-const FilterSortSection = ({
-  filterProps: { categories },
-  sortProps: { sort, setSort },
-  fetchProducts,
-}) => {
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [applyDisabled, setApplyDisabled] = useState(false);
+const SelectDropdown = ({ handleClick, fieldName }) => {
+  return (
+    <Box sx={{ minWidth: 85 }}>
+      <FormControl fullWidth size="small">
+        <InputLabel htmlFor={fieldName}>{fieldName}</InputLabel>
+        <Select
+          label={fieldName}
+          value=""
+          style={{ backgroundColor: "white" }}
+          inputProps={{ readOnly: true, style: { cursor: "pointer" } }}
+          onClick={handleClick}
+        ></Select>
+      </FormControl>
+    </Box>
+  );
+};
 
-  const [filterOptions, setFilterOptions] = useState(INITIAL_FILTER_CONFIG);
+const Filter = ({ handleClick }) => (
+  <SelectDropdown handleClick={handleClick} fieldName="Filter" />
+);
+
+const Sort = ({ handleClick }) => (
+  <SelectDropdown handleClick={handleClick} fieldName="Sort" />
+);
+
+const FilterSortSection = ({ categories, fetchProducts }) => {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [openedByFilter, setOpenedByFilter] = useState(false);
+  const [filterConfig, setFilterConfig] = useState(INITIAL_FILTER_CONFIG);
+  const [sortConfig, setSortConfig] = useState(INITIAL_FILTER_CONFIG);
 
   const filterSectionStyle = {
     display: "flex",
@@ -35,44 +64,60 @@ const FilterSortSection = ({
 
   const handleCheckboxChange = (filterType, event, filterValue) => {
     const filterKey = filterType === "category" ? "category" : "availability";
-    const oldFilterConfig = filterOptions[filterKey];
+    const oldFilterConfig = filterConfig[filterKey];
     const newFilterConfig = event.target.checked
       ? [...oldFilterConfig, filterValue]
       : oldFilterConfig.filter((cat) => cat !== filterValue);
 
-    setFilterOptions((state) => ({
+    setFilterConfig((state) => ({
       ...state,
       [filterKey]: newFilterConfig,
     }));
   };
 
   const handlePriceRangeChange = (range, rangeValue) => {
-    const oldRangeConfig = filterOptions.priceRange;
+    const oldRangeConfig = filterConfig.priceRange;
     const newRangeConfig = {
       ...oldRangeConfig,
       [range]: isNaN(parseFloat(rangeValue)) ? "" : parseFloat(rangeValue),
     };
 
-    setFilterOptions((state) => ({
+    setFilterConfig((state) => ({
       ...state,
       priceRange: newRangeConfig,
     }));
   };
 
-  const toggleDrawer = () => setDrawerOpen(!drawerOpen);
-  const handleApplyFilterClick = () => {
-    toggleDrawer();
-    fetchProducts(filterOptions);
+  const handleSortConfigChange = (e, value) => {
+    setSortConfig(value);
   };
-  const resetFilterOptions = () => setFilterOptions(INITIAL_FILTER_CONFIG);
+
+  const checkError = (type) => {
+    const min = parseInt(filterConfig.priceRange.min);
+    const max = parseInt(filterConfig.priceRange.max);
+
+    return isNaN(type === "min" ? max : min) ? false : min > max;
+  };
+
+  const toggleDrawer = (filterTriggered) => {
+    setDrawerOpen(!drawerOpen);
+    setOpenedByFilter(filterTriggered);
+  };
+
+  const handleApplyFilterClick = () => {
+    setDrawerOpen(false);
+    fetchProducts(filterConfig, sortConfig);
+  };
+
+  const resetFilterOptions = () => setFilterConfig(INITIAL_FILTER_CONFIG);
 
   return (
     <div className="product-filters" style={filterSectionStyle}>
       {/* Filter Select Dropdown */}
-      <Filter handleClick={toggleDrawer} />
+      <Filter handleClick={() => toggleDrawer(true)} />
 
       {/* Sort Select Dropdown */}
-      <Sort />
+      <Sort handleClick={() => toggleDrawer(false)} />
 
       {/* Side Drawer to show filter and sort content */}
       <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer}>
@@ -87,24 +132,25 @@ const FilterSortSection = ({
           }}
         >
           <IconButton
-            aria-label="delete"
             sx={{ position: "absolute", right: 0, mx: { md: 6, xs: 3 } }}
             onClick={toggleDrawer}
           >
             <CloseIcon />
           </IconButton>
 
-          <FilterDrawerContent
-            categories={categories}
-            filterOptions={filterOptions}
-            handleChange={{ handlePriceRangeChange, handleCheckboxChange }}
-            disableApply={setApplyDisabled}
-          />
-
-          {/* <SortDrawerContent
-            filterOptions={filterOptions}
-            handleChange={{ handlePriceRangeChange, handleCheckboxChange }}
-          /> */}
+          {openedByFilter ? (
+            <FilterDrawerContent
+              categories={categories}
+              filterConfig={filterConfig}
+              handleChange={{ handlePriceRangeChange, handleCheckboxChange }}
+              checkError={checkError}
+            />
+          ) : (
+            <SortDrawerContent
+              sortConfig={sortConfig}
+              handleChange={handleSortConfigChange}
+            />
+          )}
 
           <ButtonGroup>
             <Button
@@ -115,7 +161,7 @@ const FilterSortSection = ({
                 width: "49%",
                 height: 50,
               }}
-              disabled={applyDisabled}
+              disabled={checkError()}
               onClick={handleApplyFilterClick}
             >
               Apply Filters
