@@ -1,8 +1,9 @@
 import Home from "@/pages/Home/Home";
 import About from "@/pages/About/About";
-import Products from "@/pages/Products/Products";
+import ProductGallery from "@/pages/ProductGallery/ProductGallery";
 import Login from "@/pages/Login/Login";
 import RootLayout from "@/components/layout/RootLayout";
+import ProductPage from "@/pages/ProductPage/ProductPage";
 
 const routes = [
   {
@@ -19,7 +20,17 @@ const routes = [
       },
       {
         path: "products",
-        element: <Products />,
+        children: [
+          {
+            index: true,
+            element: <ProductGallery />,
+          },
+          ,
+          {
+            path: ":product_id",
+            element: <ProductPage />,
+          },
+        ],
       },
       {
         path: "login",

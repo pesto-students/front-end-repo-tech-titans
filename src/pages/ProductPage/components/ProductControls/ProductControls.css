@@ -1,0 +1,12 @@
+.product__controls {
+  margin-bottom: 40px;
+}
+
+.product__size {
+  margin-bottom: 16px;
+}
+
+.product__control__label {
+  margin-bottom: 8px;
+  font-weight: 500;
+}
