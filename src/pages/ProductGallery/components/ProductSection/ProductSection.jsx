@@ -3,7 +3,7 @@ import ProductCard from "../ProductCard/ProductCard";
 
 const StyledProductSection = styled("section")(() => ({
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
+  gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
   gridGap: "40px",
   margin: "16px 0px",
 }));
@@ -11,7 +11,7 @@ const StyledProductSection = styled("section")(() => ({
 const ProductSection = ({ products }) => {
   return (
     <StyledProductSection>
-      {products.map((item, idx) => (
+      {products?.map((item, idx) => (
         <ProductCard data={item} key={idx} />
       ))}
     </StyledProductSection>

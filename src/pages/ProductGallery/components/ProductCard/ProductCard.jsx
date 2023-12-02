@@ -14,7 +14,7 @@ const cardStyles = {
 };
 
 const ProductCard = ({ data }) => {
-  const { id: productId } = data;
+  const { name, price, id: productId } = data;
   return (
     <Card sx={cardStyles} elevation={0}>
       <CardActionArea component={RouterLink} to={`${productId}`}>
@@ -25,10 +25,10 @@ const ProductCard = ({ data }) => {
         />
         <CardContent>
           <Typography align="center" gutterBottom variant="h6">
-            Product Name 👉 {productId}
+            Product Name 👉 {name}
           </Typography>
           <Typography align="center" variant="body1">
-            Product Price
+            Product Price {price}
           </Typography>
         </CardContent>
       </CardActionArea>
