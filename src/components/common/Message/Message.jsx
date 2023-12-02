@@ -13,7 +13,6 @@ const Message = styled("div")({
 });
 
 const MessageContainer = ({ error, children }) => {
-  console.log("CONTAINER", error);
   return (
     <Message
       className="msg-container"

@@ -100,8 +100,10 @@ const FilterSortSection = ({ categories, fetchProducts }) => {
   };
 
   const toggleDrawer = (filterTriggered) => {
+    // Helps select filter or sort drawer content
+    // only at the time of drawer opening
+    if (!drawerOpen) setOpenedByFilter(filterTriggered);
     setDrawerOpen(!drawerOpen);
-    setOpenedByFilter(filterTriggered);
   };
 
   const handleApplyFilterClick = () => {
@@ -123,7 +125,10 @@ const FilterSortSection = ({ categories, fetchProducts }) => {
       <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer}>
         <Box
           sx={{
-            maxWidth: { md: 550, xs: "100%" },
+            maxWidth: { xs: "100%" },
+            // width: { xs: "100%" },
+
+            minWidth: { md: 500 },
             p: { md: 6, xs: 3 },
             py: { xs: 6 },
             height: "100%",
@@ -163,6 +168,7 @@ const FilterSortSection = ({ categories, fetchProducts }) => {
               }}
               disabled={checkError()}
               onClick={handleApplyFilterClick}
+              fullWidth
             >
               Apply Filters
             </Button>
@@ -171,6 +177,7 @@ const FilterSortSection = ({ categories, fetchProducts }) => {
               size="large"
               style={{ borderColor: grey["800"], color: "black", width: "49%" }}
               onClick={resetFilterOptions}
+              fullWidth
             >
               Clear All
             </Button>
